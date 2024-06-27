@@ -1,0 +1,29 @@
+plugin.gdprextensionscomgrtwoc_gdprgoogle_twocgrid {
+    view {
+        # cat=plugin.gdprextensionscomgrtwoc_gdprgoogle_twocgrid/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:gdpr_extensions_com_grtwoc/Resources/Private/Templates/
+        # cat=plugin.gdprextensionscomgrtwoc_gdprgoogle_twocgrid/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:gdpr_extensions_com_grtwoc/Resources/Private/Partials/
+        # cat=plugin.gdprextensionscomgrtwoc_gdprgoogle_twocgrid/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:gdpr_extensions_com_grtwoc/Resources/Private/Layouts/
+    }
+    persistence {
+        # cat=plugin.gdprextensionscomgrtwoc_gdprgoogle_twocgrid//a; type=string; label=Default storage PID
+        storagePid =
+    }
+}
+
+module.gdprextensionscomgrtwoc_gdprmanager {
+    view {
+        # cat=module.gdprextensionscomgrtwoc_gdprmanager/file; type=string; label=Path to template root (BE)
+        templateRootPath = EXT:gdpr_extensions_com_grtwoc/Resources/Private/Backend/Templates/
+        # cat=module.gdprextensionscomgrtwoc_gdprmanager/file; type=string; label=Path to template partials (BE)
+        partialRootPath = EXT:gdpr_extensions_com_grtwoc/Resources/Private/Backend/Partials/
+        # cat=module.gdprextensionscomgrtwoc_gdprmanager/file; type=string; label=Path to template layouts (BE)
+        layoutRootPath = EXT:gdpr_extensions_com_grtwoc/Resources/Private/Backend/Layouts/
+    }
+    persistence {
+        # cat=module.tx_gdprextensionscomyoutube_gdprmanager//a; type=string; label=Default storage PID
+        storagePid =
+    }
+}

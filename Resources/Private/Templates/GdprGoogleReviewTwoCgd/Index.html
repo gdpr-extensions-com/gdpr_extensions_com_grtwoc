@@ -1,0 +1,532 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+{namespace my=GdprExtensionsCom\GdprExtensionsComGrtwoc\ViewHelpers}
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+
+<f:layout name="Default" />
+<f:section name="content">
+<f:asset.css identifier="reviewcss" href="EXT:gdpr_extensions_com_grtwoc/Resources/Public/Css/review.css" />
+<style type="text/css">
+  /* for widget*/
+
+  #gdpr-extensions-com-cookie-container .gdprInner iframe {
+      height: 100vh;
+      max-height: 500px;
+      margin: 70px 0;
+      max-width: 1020px;
+  }
+
+  #gdpr-extensions-com-cookie-container .gdprInner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-height: 600px;
+  }
+
+  #gdpr-extensions-com-cookie-container div.privacy-msg {
+      max-width: 1020px;
+      padding: 18px;
+      width: 100% !important;
+      height: 100% !important;
+      position: relative;
+      max-height: 500px;
+      margin: 30px;
+  }
+
+  #gdpr-extensions-com-cookie-container div.privacy-msg .wraper {
+      width: 100%;
+      border-radius: 6px;
+      padding: 6% 85px;
+      text-align: center;
+      -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      -moz-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      height: 100%;
+      position: relative;
+      /*height: 100%;*/
+      /*display: flex;*/
+      /*justify-content: center;*/
+      /*align-items: center;*/
+      /*flex-direction: column;*/
+  }
+
+  #gdpr-extensions-com-cookie-container .checkbox-label {
+      display: flex;
+      justify-content: center;
+  }
+
+  #gdpr-extensions-com-cookie-container .link-action {
+      display: block;
+      background: #ee7202;
+      color: white;
+      padding: 8px 23px;
+      width: fit-content;
+      margin: 20px auto;
+  }
+
+  #gdpr-extensions-com-cookie-container .link-action.square {
+      border-radius: 6px;
+  }
+
+  #gdpr-extensions-com-cookie-container .link-action.round {
+      border-radius: 100px;
+  }
+
+  #gdpr-extensions-com-cookie-container .link-action:hover {
+      color: white;
+  }
+
+  #gdpr-extensions-com-cookie-container .checkbox-label input {
+      margin-right: 12px
+  }
+
+  #gdpr-extensions-com-cookie-container .wraper .bg-image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -1;
+      border-radius: 6px;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+  }
+
+  /* for widget*/
+  .gdpr-extensions-com-cookie-fab-mo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      color: white;
+      font-size: 48px;
+      text-align: center;
+
+      /* Positioning Properties */
+      position: fixed;
+      /* Use 'absolute' if it should be relative to its nearest positioned ancestor (instead of relative to the viewport) */
+      bottom: 20px;
+      /* Space from the bottom */
+      left: 20px;
+      /* Space from the left */
+  }
+
+  .gdpr-extensions-com-cookie-fab-mo.right {
+      right: 20px;
+      left: unset;
+  }
+
+  #gdpr-extensions-com-cookie-model.modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  #gdpr-extensions-com-cookie-model .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px 0;
+      border: 1px solid #888;
+      width: 30%;
+      border-radius: 6px;
+  }
+
+  .mb-0 {
+      margin-bottom: 0;
+  }
+
+  #gdpr-extensions-com-cookie-model .title{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 11px;
+      margin: 0 16px 16px 16px;
+  }
+
+  #gdpr-extensions-com-cookie-model .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      BACKGROUND: #dad9da;
+      COLOR: black;
+      PADDING: 15px 6px 13px 6px;
+      line-height: 0;
+      border-radius: 3px;
+
+  }
+
+  #gdpr-extensions-com-cookie-model .cookie-section {
+      padding: 22px 11px;
+      background: #ffe8d8;
+      border-radius: 6px;
+      margin: 0 16px 20px 16px;
+  }
+
+  #gdpr-extensions-com-cookie-model .cookie-section .cookie-inner {
+      margin-bottom: 13px;
+  }
+
+  #gdpr-extensions-com-cookie-model .cookie-section p {
+      margin-top: 0;
+  }
+
+  #gdpr-extensions-com-cookie-model .close:hover,
+  #gdpr-extensions-com-cookie-model .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+  }
+
+  #gdpr-extensions-com-cookie-model .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 22px;
+  }
+
+  #gdpr-extensions-com-cookie-model .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+  }
+
+  #gdpr-extensions-com-cookie-model .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+      border-radius: 34px;
+      /* This line makes the slider rounded */
+  }
+
+  #gdpr-extensions-com-cookie-model .btn-lg {
+      background: #EE7202;
+      border-radius: 6px;
+      border: 1px solid #EE7202;
+      color: #fff;
+      padding: 8px 17px;
+      cursor: pointer;
+      margin-top: 0;
+      font-weight: bold;
+      cursor: pointer;
+  }
+
+  #gdpr-extensions-com-cookie-model .btn-lg.disabled {
+      background: #dad9da;
+      color: black;
+      cursor: default;
+      border-color: #dad9da;
+  }
+
+  #gdpr-extensions-com-cookie-model .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+      border-radius: 50%;
+      /* This line makes the button inside the slider rounded */
+  }
+
+  #gdpr-extensions-com-cookie-model input:checked+.slider {
+      background-color: #ee7202;
+  }
+
+  #gdpr-extensions-com-cookie-model input:focus+.slider {
+      box-shadow: 0 0 1px #ee7202;
+  }
+
+  #gdpr-extensions-com-cookie-model input:checked+.slider:before {
+      -webkit-transform: translateX(28px);
+      -ms-transform: translateX(28px);
+      transform: translateX(28px);
+  }
+
+  .d-flex {
+      display: flex !important;
+  }
+
+  .justify-content-btw {
+      justify-content: space-between !important;
+  }
+
+  .align-items-ctr {
+      align-items: center !important;
+  }
+
+  #gdpr-inner:not(.gdprInner) iframe {
+      height: 100vh;
+  }
+  #gdpr-extensions-com-cookie-container .bgComtainer-image .overlay {
+      position: absolute;
+      content: '';
+      background: black;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.3;
+  }
+  #gdpr-extensions-com-cookie-model .accept-all {
+      padding: 20px 11px 4px 11px;
+      box-shadow: rgba(0, 0, 0, 0.06) 0px -2px 3px;
+      display: flex;
+      justify-content: center;
+  }
+  #gdpr-extensions-com-cookie-model .scroll {
+      max-height: 410px;
+      overflow-y: auto;
+  }
+</style>
+
+
+
+
+
+  <div class="review-ext">
+    <div class="review-bg d-none" style="background-color: {data.gdpr_background_color_twocgd};">
+      <div class="container two-grid-container">
+        <div class="review-page">
+          <span class="d-none border-color"><f:format.raw>{data.gdpr_color_of_border_twocgd}</f:format.raw></span>
+          <span class="d-none bg-container-color"><f:format.raw>{data.gdpr_background_color_twocgd}</f:format.raw></span>
+          <span class="d-none review-txt-color"><f:format.raw>{data.gdpr_color_of_text_twocgd}</f:format.raw></span>
+          
+          <div class="review-page__content">
+            <div id="reviews-list" class="review-container">
+    
+            </div>
+          </div>
+        </div>
+        <f:format.raw>
+          <button class="load-more-btn {f:if(condition:'{data.gdpr_button_shape_twocgd}==1', then:'load-more-round', else: 'right-time')}" data-next-page="{reviews.nextPageToken}" id="loadMoreReviews" style="color: {data.gdpr_button_text_color_twocgd}; background-color: {data.gdpr_button_color_twocgd};"> <f:translate key="loadMore" extensionName="GdprExtensionsComGrtwoc" /></button>
+        </f:format.raw>
+      </div>
+      <div class="star">
+      </div>
+    </div>
+  </div>
+
+  <script>
+     let twoCgdReviewsArray = [];
+     let  loadMoreButtonTwocgd = document.getElementById('loadMoreReviews');
+     let reviewsContainerTwocgd = document.getElementById('reviews-list');
+     let borderColorTwocgd = document.querySelector('.border-color');
+     let bgContainerColorTwocgd = document.querySelector('.bg-container-color');
+     let loadMoreButtonTwocgdTwocgd = document.querySelector('.review-txt-color');
+         
+  
+      function updateReviews() {
+    let reviewsContainerTwocgd = document.getElementById('reviews-list');
+    let reviewExt = document.querySelector('.review-ext .review-bg');
+    reviewsContainerTwocgd.innerHTML = '';
+
+    // Create a flex container
+    let flexContainer = document.createElement('div');
+    flexContainer.className = 'flex-container';
+    flexContainer.style.display = 'flex';
+    flexContainer.style.flexWrap = 'wrap'; // Ensure reviews wrap to the next line
+
+    twoCgdReviewsArray.forEach(review => {
+        let reviewDiv = document.createElement('div'); // Create review div
+        reviewDiv.className = 'review';
+        reviewDiv.style.borderColorTwocgd = borderColorTwocgd?.textContent;
+        reviewDiv.style.backgroundColor = bgContainerColorTwocgd?.textContent;
+        reviewDiv.style.margin = '10px'; // Add some margin between reviews
+
+        let reviewUserDiv = document.createElement('div'); // Create review user div which has name and date
+        reviewUserDiv.className = 'review__user';
+        reviewDiv.appendChild(reviewUserDiv);
+
+        let reviewUserImageDiv = document.createElement('img'); // Create review user Image div 
+        reviewUserImageDiv.className = 'review__user-list-image';
+        reviewUserImageDiv.src = review.reviewer_profile_photo_url;
+        reviewUserDiv.appendChild(reviewUserImageDiv);
+
+        let userContentDiv = document.createElement('p');
+        userContentDiv.className = 'review__user-content';
+        reviewUserDiv.appendChild(userContentDiv);
+
+        let name_P_Tag = document.createElement('p'); // Create review name render in review user
+        name_P_Tag.className = 'review__user-name'
+        name_P_Tag.textContent = review.reviewer_display_name;
+        name_P_Tag.style.fontWeight = 'bold';
+        name_P_Tag.style.marginBottom = '7px';
+        name_P_Tag.style.color = loadMoreButtonTwocgdTwocgd?.textContent;
+        userContentDiv.appendChild(name_P_Tag);
+
+        let date_P_tag = document.createElement('p'); // Create review date render in review user
+        date_P_tag.className = 'review__user-date';
+        date_P_tag.style.color = loadMoreButtonTwocgdTwocgd?.textContent;
+        date_P_tag.textContent = review.create_time;
+        userContentDiv.appendChild(date_P_tag);
+
+        let reviewContent = document.createElement('div'); // Create review content div
+        reviewContent.className = 'review__content';
+        reviewDiv.appendChild(reviewContent);
+
+        let ratingDiv = document.createElement('div'); // Create review content stars
+        ratingDiv.className = 'review__rating';
+        let starElements = createRatingDiv(review.star_rating);
+        ratingDiv.appendChild(starElements);
+        reviewContent.appendChild(ratingDiv);
+
+        let comment_P_tag = document.createElement('p');
+          comment_P_tag.className = 'review__text';
+          comment_P_tag.style.color = loadMoreButtonTwocgdTwocgd?.textContent;
+          let commentText = review.comment;
+
+          if (commentText.length > 285) {
+
+            let truncatedComment = commentText.slice(0, 285);
+            let halfTextDiv = document.createElement('div');
+            halfTextDiv.className = 'half-text';
+
+            let truncateSpan = document.createElement('span');
+            halfTextDiv.append(truncateSpan)
+            truncateSpan.textContent = truncatedComment;
+            
+            let halfTextSpan = document.createElement('span');
+            halfTextSpan.classList = 'half-text--dots';
+            halfTextSpan.textContent = '...';
+            halfTextDiv.appendChild(halfTextSpan);
+
+            let moreTextSpan = document.createElement('span');
+            moreTextSpan.classList = 'go-reviewsclient-more-text';
+            moreTextSpan.textContent = commentText.slice(285);
+            halfTextDiv.appendChild(moreTextSpan)
+            
+            let seeLess_a_tag = document.createElement('a');
+            seeLess_a_tag.className = 'go-reviewsclient-see-less';
+            seeLess_a_tag.style.color = loadMoreButtonTwocgdTwocgd?.textContent;
+            seeLess_a_tag.textContent = 'weniger zeigen';
+
+            let seeMore_a_tag = document.createElement('a');
+            seeMore_a_tag.className = 'go-reviewsclient-see-more';
+            seeMore_a_tag.style.color = loadMoreButtonTwocgdTwocgd?.textContent;
+            seeMore_a_tag.textContent = 'mehr anzeigen';
+
+            comment_P_tag.append(halfTextDiv);
+            comment_P_tag.append(seeLess_a_tag);
+            comment_P_tag.append(seeMore_a_tag);
+
+            seeMore_a_tag.addEventListener('click', function() {
+              moreTextSpan.style.display = 'inline';
+              seeMore_a_tag.style.display = 'none';
+              seeLess_a_tag.style.display = 'inline';
+              halfTextSpan.style.display = 'none';
+            });
+
+            seeLess_a_tag.addEventListener('click', function() {
+              moreTextSpan.style.display = 'none';
+              seeMore_a_tag.style.display = 'inline';
+              seeLess_a_tag.style.display = 'none';
+              halfTextSpan.style.display = 'inline';
+            });
+
+          } else {
+            comment_P_tag.textContent = commentText;
+          }
+          reviewContent.appendChild(comment_P_tag);
+
+        let sourceP = document.createElement('p'); // Create review content source
+        sourceP.className = 'review__source';
+        sourceP.textContent = 'Quelle: ' + review.source;
+        sourceP.style.color = loadMoreButtonTwocgdTwocgd?.textContent;
+        reviewContent.appendChild(sourceP);
+
+        // Append the review to the flex container
+        flexContainer.appendChild(reviewDiv);
+    });
+
+    // Append the flex container to the reviews container
+    reviewsContainerTwocgd.appendChild(flexContainer);
+    reviewExt.classList.remove('d-none');
+}
+
+
+      function createRatingDiv(starRating) {
+          const ratingDiv = document.createElement('div');
+          ratingDiv.className = 'review__starParent'
+          
+          for (let i = 0; i < starRating; i++) {
+              const starImg = document.createElement('div');
+              starImg.className = 'review__star';
+              ratingDiv.appendChild(starImg);
+          }
+          
+          return ratingDiv;
+      }
+
+
+      function fetchReviews(reveiwsToFetch = 0) {
+          const showReviewsUrl = '<f:format.raw>{showReviewsUrl}</f:format.raw>';
+          const formData = new FormData();
+          console.log('in fetch reviews twocgd');
+          formData.append("reveiwsToFetch", reveiwsToFetch);
+          fetch(showReviewsUrl, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json'
+            },
+            body: formData
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Request failed');
+            }
+            return response.text();
+          })
+          .then(data => {
+            parsedData = JSON.parse(data);
+            twoCgdReviewsArray = parsedData.fetchedReviews;
+            Completed = parsedData.completed;
+              if(Completed ==1){
+                     loadMoreButtonTwocgd.classList.add('d-none')
+                  }
+              if(twoCgdReviewsArray.length  == 0){
+                     loadMoreButtonTwocgd.classList.add('d-none');
+              }
+              else{
+                updateReviews();
+              }
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+
+      window.onload = function() {
+          fetchReviews();
+      }
+
+      
+       loadMoreButtonTwocgd.onclick = function() {
+            fetchReviews(twoCgdReviewsArray.length + 4 );
+      }
+
+    
+      
+  </script>
+
+</f:section>
+
+</html>
